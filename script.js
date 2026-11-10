@@ -3,12 +3,12 @@
    ========================================================================== */
 
 const PROFILE_LINKS = {
-  linkedin: "https://www.linkedin.com/in/jonathancusandei",
-  instagram: "https://www.instagram.com/jonathancusandei",
-  whatsapp: "https://wa.me/5533984219646?text=Ol%C3%A1%20Jonathan!%20Vi%20seu%20portf%C3%B3lio%20profissional%20e%20gostaria%20de%20conversar.",
+  linkedin: "https://www.linkedin.com/in/jonathancusandei/",
+  instagram: "https://www.instagram.com/jonathan.campos.c/",
+  whatsapp: "https://wa.me/5533984219646",
   email: "mailto:jonathancusandei@gmail.com",
   // Se desejar apontar direto para o link compartilhado da pasta "05 - Certificados" no Google Drive, basta colar abaixo:
-  driveCertificados: "#certificados"
+  driveCertificados: "https://drive.google.com/drive/folders/1a7LQ4NkBHIOzWLHPlceOv_vfF8xGvp0C?usp=sharing"
 };
 
 const CASE_STUDIES = {
