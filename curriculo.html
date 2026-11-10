@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currículo_Jonathan_Campos_Cusandei</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #1d4ed8;
+      --text: #1e293b;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --new-bg: #ecfdf5;
+      --new-border: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: #e2e8f0;
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 10.2pt;
+      padding: 90px 16px 40px;
+    }
+
+    /* Barra de Ferramentas Flutuante (Oculta na Impressão/PDF) */
+    .cv-toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .toolbar-left, .toolbar-right {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toolbar-btn {
+      background: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid #334155;
+      padding: 7px 13px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .toolbar-btn:hover, .toolbar-btn.active {
+      background: #2563eb;
+      border-color: #3b82f6;
+      color: #fff;
+    }
+
+    .toolbar-btn-print {
+      background: #10b981;
+      border-color: #059669;
+      color: #fff;
+    }
+
+    .toolbar-btn-print:hover {
+      background: #059669;
+    }
+
+    /* Folha A4 / Container do Currículo */
+    .cv-sheet {
+      max-width: 210mm;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 18mm 18mm;
+      box-shadow: 0 12px 36px rgba(15, 23, 42, 0.15);
+      border-radius: 4px;
+    }
+
+    .cv-sheet[contenteditable="true"] {
+      outline: 2px dashed #2563eb;
+      outline-offset: -6px;
+    }
+
+    /* Cabeçalho do Currículo */
+    .cv-header {
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+
+    .cv-name {
+      font-size: 20pt;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 1.15;
+    }
+
+    .cv-contact {
+      margin-top: 6px;
+      font-size: 9.5pt;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+    }
+
+    .cv-contact a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .cv-objective {
+      margin-top: 10px;
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: var(--primary);
+      background: #f1f5f9;
+      padding: 6px 10px;
+      border-left: 4px solid var(--accent);
+    }
+
+    /* Seções */
+    .cv-section {
+      margin-bottom: 14px;
+    }
+
+    .cv-section-title {
+      font-size: 10.8pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--primary);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 3px;
+      margin-bottom: 8px;
+    }
+
+    .cv-summary {
+      text-align: justify;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    /* Blocos de Experiência / Educação */
+    .cv-item {
+      margin-bottom: 10px;
+      page-break-inside: avoid;
+    }
+
+    .cv-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .cv-item-title {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 10.2pt;
+    }
+
+    .cv-item-period {
+      font-weight: 600;
+      font-size: 9.2pt;
+      color: var(--muted);
+    }
+
+    .cv-item-sub {
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 3px;
+    }
+
+    .cv-list {
+      padding-left: 18px;
+      margin-top: 3px;
+    }
+
+    .cv-list li {
+      margin-bottom: 2.5px;
+      text-align: justify;
+    }
+
+    .skills-compact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 18px;
+    }
+
+    /* Destaque visual opcional na tela para itens recém-adicionados do Drive */
+    body.highlight-new .new-from-drive {
+      background-color: var(--new-bg);
+      border-left: 3px solid var(--new-border);
+      padding-left: 8px;
+      border-radius: 2px;
+    }
+
+    .badge-new-screen {
+      display: none;
+      font-size: 7.5pt;
+      font-weight: 700;
+      background: #10b981;
+      color: #fff;
+      padding: 1px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    body.highlight-new .badge-new-screen {
+      display: inline-block;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+        font-size: 9.8pt;
+      }
+      .cv-toolbar {
+        display: none !important;
+      }
+      .cv-sheet {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+        outline: none !important;
+      }
+      .badge-new-screen {
+        display: none !important;
+      }
+      body.highlight-new .new-from-drive {
+        background: transparent !important;
+        border-left: none !important;
+        padding-left: 0 !important;
+      }
+      @page {
+        margin: 12mm 14mm;
+      }
+    }
+  </style>
+</head>
+<body class="highlight-new">
+
+  <!-- BARRA DE CONTROLE (NÃO SAI NA IMPRESSÃO/PDF) -->
+  <div class="cv-toolbar">
+    <div class="toolbar-left">
+      <a href="index.html" class="toolbar-btn">⬅ Voltar ao Portfólio</a>
+      <span style="font-size: 0.78rem; color: #94a3b8; margin-left: 4px;">Adaptar Objetivo para Vaga:</span>
+      <button class="toolbar-btn active" onclick="setFocus('geral', this)">Geral Completo</button>
+      <button class="toolbar-btn" onclick="setFocus('dados', this)">Dados, BI & Finanças</button>
+      <button class="toolbar-btn" onclick="setFocus('automacao', this)">Automação & IA</button>
+      <button class="toolbar-btn" onclick="setFocus('adm', this)">Administrativo, Processos & DP</button>
+    </div>
+
+    <div class="toolbar-right">
+      <button class="toolbar-btn" id="toggleNewBtn" onclick="toggleHighlightNew()">✨ Destacar Novos Itens do Drive (Ativo)</button>
+      <button class="toolbar-btn" id="toggleEditBtn" onclick="toggleEditable()">✏️ Editar Texto na Tela</button>
+      <button class="toolbar-btn toolbar-btn-print" onclick="window.print()">🖨️ Imprimir / Salvar em PDF</button>
+    </div>
+  </div>
+
+  <!-- FOLHA DO CURRÍCULO -->
+  <main class="cv-sheet" id="cvSheet">
+
+    <!-- CABEÇALHO -->
+    <header class="cv-header">
+      <h1 class="cv-name">Jonathan Campos Cusandei</h1>
+      <div class="cv-contact">
+        <span>📍 Governador Valadares/MG</span>
+        <span>📞 (33) 98421-9646</span>
+        <span>✉️ <a href="mailto:jonathancusandei@gmail.com">jonathancusandei@gmail.com</a></span>
+        <span>🔗 <a href="https://www.linkedin.com/in/jonathancusandei" target="_blank">linkedin.com/in/jonathancusandei</a></span>
+        <span>🌐 <a href="index.html">Portfólio de Projetos e Certificados</a></span>
+      </div>
+      <div class="cv-objective" id="cvObjective">
+        OBJETIVO: Analista de Dados | Business Intelligence | Finanças Corporativas | Automação de Processos e IA
+      </div>
+    </header>
+
+    <!-- RESUMO PROFISSIONAL -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Resumo Profissional</h2>
+      <p class="cv-summary" id="cvSummaryText">
+        Profissional em fase final de conclusão do <strong>Bacharelado em Administração pela UFJF</strong> (grade curricular e defesa de TCC concluídas em novembro/2026, com <strong>disponibilidade imediata para horário integral</strong>) e <strong>Técnico em Finanças pelo SENAC (800h)</strong>. Possui mais de 6 anos de trajetória prática integrando rotinas administrativas, financeiras, Departamento Pessoal (<strong>TOTVS ERP</strong>), atendimento de alta demanda (<strong>UAI</strong>), análise quantitativa de dados (<strong>Power BI, Excel Avançado, Python e Jamovi</strong>) e desenvolvimento de automações e Agentes de IA (<strong>n8n, APIs REST, Webhooks e CRM</strong>). Perfil analítico e orientado a resultados, com histórico comprovado em auditoria de funis comerciais, modelagem econômico-financeira, mapeamento de processos (BPMN/CEP) e redução de retrabalho operacional.
+      </p>
+    </section>
+
+    <!-- EDUCAÇÃO / FORMAÇÃO ACADÊMICA -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Formação Acadêmica</h2>
+
+      <div class="cv-item new-from-drive">
+        <div class="cv-item-header">
+          <span class="cv-item-title">BACHARELADO EM ADMINISTRAÇÃO – UNIVERSIDADE FEDERAL DE JUIZ DE FORA (UFJF) <span class="badge-new-screen">Status Atualizado</span></span>
+          <span class="cv-item-period">2º/2021 – 2º/2026 (Concludente)</span>
+        </div>
+        <div class="cv-item-sub">Situação: Grade curricular e Trabalho de Conclusão de Curso (TCC) concluídos em Nov/2026 • Colação de grau oficial em Fev/2027 (Disponibilidade imediata e integral)</div>
+        <ul class="cv-list">
+          <li><strong>Trabalho de Conclusão de Curso (TCC):</strong> <em>“Plano de Negócio para uma Startup de Alimentação Saudável em Governador Valadares (Nourish Ltda.)”</em> — Pesquisa de mercado empírica ($N = 156$) analisada em Python, modelagem operacional e viabilidade financeira de 5 anos (DRE, Fluxo de Caixa, VPL, TIR e Payback).</li>
+          <li><strong>Pesquisa e Extensão Universitária:</strong> Bolsista de Monitoria Acadêmica em Matemática Básica (<code>MAT008GV</code>), autor de estudo científico sobre Recuperação Judicial de empresas listadas na B3 (2022–2025), Membro da Diretoria da Atlética Gerenciais UFJF-GV e Membro da Comissão Organizadora de Extensão.</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <span class="cv-item-title">TÉCNICO EM FINANÇAS – SENAC MINAS (PROGRAMA TRILHAS DE FUTURO)</span>
+          <span class="cv-item-period">10/2021 – 04/2023 • 800 Horas</span>
+        </div>
+        <ul class="cv-list">
+          <li>Formação técnica em Contabilidade Geral e de Custos, Análise de Demonstrações Contábeis (BP e DRE), Matemática Financeira, Orçamento Empresarial, Fluxo de Caixa, Gestão Tributária e Viabilidade de Projetos.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EXPERIÊNCIA PROFISSIONAL -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Experiência Profissional</h2>
+
+      <div class="cv-item new-from-drive">
+        <div class="cv-item-header">
+          <span class="cv-item-title">CONSULTOR EM AUTOMAÇÃO, DADOS, BI E GESTÃO DIGITAL – ATUAÇÃO AUTÔNOMA (MEI) <span class="badge-new-screen">Adicionado do Drive</span></span>
+          <span class="cv-item-period">01/2025 – Atual</span>
+        </div>
+        <ul class="cv-list">
+          <li><strong>Auditoria de Dados, IA e Sistemas Hoteleiros (Pousada Vale Silvestre Eco Park):</strong> Auditoria analítica de 2.913 atendimentos e 1.396 oportunidades na plataforma AskSuite (Sophia AI), diagnosticando <strong>R$ 1.551.930,21</strong> em intenção de compra represada e otimizando custos de templates WhatsApp API. Integração operacional anti-overbooking entre <strong>PMS FastHotel, ERP Desbravador e InnCard</strong>, além do desenvolvimento do Catálogo Web Interativo e Sistema Gerador de 200 Cartões de Consumo com QR Code.</li>
+          <li><strong>Automação Jurídica e Agentes de IA (Escritório Dr. Rafael Siqueira):</strong> Arquitetura de Agente Orquestrador de WhatsApp para triagem jurídica automatizada e desenvolvimento de script em <strong>Python</strong> integrado à <strong>API ZapSign</strong> para geração instantânea de Procurações/Contratos em PDF e assinatura digital.</li>
+          <li><strong>BI de Tráfego Pago (Meta Ads API) e SEO Local (GMN):</strong> Extração automatizada de métricas de campanhas via API da Meta em Python (clientes <em>DANAY Beachwear</em> e <em>Helton Fontes</em>) e pipeline automatizado (Python/Playwright/SQLite) de auditoria e geolocalização EXIF no Google Meu Negócio para redes varejistas (<em>Supermercados Costão</em> e <em>Archimedes</em>).</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <span class="cv-item-title">AUTOMAÇÃO E AGENTES DE IA – GV DIGITAL SOLUTION</span>
+          <span class="cv-item-period">03/2025 – 01/2026</span>
+        </div>
+        <ul class="cv-list">
+          <li>Desenvolvimento e manutenção de workflows automatizados utilizando <strong>n8n</strong>, integrando sistemas via <strong>APIs REST e Webhooks</strong> para otimização de fluxos operacionais e comerciais.</li>
+          <li>Implementação de agentes de Inteligência Artificial aplicados à triagem, atendimento automatizado e padronização de processos digitais, além de implantação de CRM (DeskcommCRM).</li>
+          <li>Estruturação de regras de validação de dados, controle de erros e logs para melhoria da estabilidade operacional e redução de retrabalho manual.</li>
+        </ul>
+      </div>
+
+      <div class="cv-item new-from-drive">
+        <div class="cv-item-header">
+          <span class="cv-item-title">COAUTOR E GESTOR DE PROJETO SOCIOAMBIENTAL (PROJETO RECICLARTE) – PULSAR JOVEM / FUNDAÇÃO RENOVA <span class="badge-new-screen">Adicionado do Drive</span></span>
+          <span class="cv-item-period">03/2024 – 07/2025</span>
+        </div>
+        <ul class="cv-list">
+          <li>Elaboração técnica, captação e execução orçamentária de <strong>R$ 40.799,99</strong> em projeto de economia circular aprovado pela Fundação Renova / FGPA em Governador Valadares, conduzindo aquisições, cronograma físico-financeiro, articulação com 4 instituições parceiras e prestação de contas.</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <span class="cv-item-title">ESTAGIÁRIO DE ATENDIMENTO – UAI (UNIDADE DE ATENDIMENTO INTEGRADO)</span>
+          <span class="cv-item-period">02/2024 – 03/2025</span>
+        </div>
+        <ul class="cv-list">
+          <li>Atuação em ambiente de alto volume de atendimento ao público, realizando triagem, validação documental e orientação ao cidadão.</li>
+          <li>Controle de agendamentos e registros operacionais utilizando planilhas em <strong>Excel</strong>, contribuindo para a organização do fluxo de atendimento e redução de inconsistências cadastrais.</li>
+          <li>Cumprimento rigoroso de normas de compliance, proteção de dados e procedimentos internos.</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <span class="cv-item-title">ESTAGIÁRIO DE DEPARTAMENTO PESSOAL – BIGMAIS SUPERMERCADOS</span>
+          <span class="cv-item-period">06/2023 – 07/2023</span>
+        </div>
+        <ul class="cv-list">
+          <li>Execução de rotinas de Departamento Pessoal com lançamento, conferência e manutenção de dados no sistema <strong>TOTVS ERP</strong>.</li>
+          <li>Apoio na apuração de folha de pagamento, controle de benefícios, férias e organização de documentação trabalhista.</li>
+          <li>Atualização de planilhas de controle para acompanhamento de indicadores e custos de RH.</li>
+        </ul>
+      </div>
+
+      <div class="cv-item new-from-drive">
+        <div class="cv-item-header">
+          <span class="cv-item-title">MONITOR ACADÊMICO (BOLSISTA) DE MATEMÁTICA BÁSICA – UFJF CAMPUS GV <span class="badge-new-screen">Adicionado do Drive</span></span>
+          <span class="cv-item-period">04/2022 – 01/2023</span>
+        </div>
+        <ul class="cv-list">
+          <li>Atendimento acadêmico, resolução de listas quantitativas e suporte didático aos estudantes na disciplina de Matemática Básica (<code>MAT008GV</code> – Departamento de Economia, Projeto <code>GV014H12</code>).</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <span class="cv-item-title">ATENDENTE MULTITAREFA – MAZZINI</span>
+          <span class="cv-item-period">11/2021 – 12/2021</span>
+        </div>
+        <ul class="cv-list">
+          <li>Cadastro e atualização de dados de clientes em sistema, garantindo integridade cadastral e atendimento ágil na resolução de demandas operacionais.</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <span class="cv-item-title">APRENDIZ VENDEDOR – CACIQUE HOME CENTER</span>
+          <span class="cv-item-period">10/2019 – 05/2021</span>
+        </div>
+        <ul class="cv-list">
+          <li>Apoio às rotinas comerciais, acompanhamento de indicadores de vendas, controle de estoque e cadastro de produtos.</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <span class="cv-item-title">ASSISTENTE ADMINISTRATIVO – FRIGOLESTE</span>
+          <span class="cv-item-period">07/2018 – 06/2019</span>
+        </div>
+        <ul class="cv-list">
+          <li>Suporte às rotinas administrativas, financeiras e de Recursos Humanos, elaboração de relatórios e controles internos em Excel e apoio à comunicação interna.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PROJETOS TÉCNICOS, FINANCEIROS E QUANTITATIVOS DE DESTAQUE -->
+    <section class="cv-section new-from-drive">
+      <h2 class="cv-section-title">Projetos Analíticos, Financeiros e de Processos em Destaque <span class="badge-new-screen">Adicionado do Drive</span></h2>
+      <ul class="cv-list">
+        <li><strong>Análise Econômico-Financeira de Empresas em Recuperação Judicial na B3 (2022–2025):</strong> Estudo longitudinal de Balanços e DREs de 6 companhias abertas (<em>Americanas, Light, Atma, Rossi, Paranapanema e Nexpe</em>), apurando Liquidez (LC, LG, CCL), Endividamento (PCT, EG) e Rentabilidade (ROA, ROE, Margem Líquida e Margem EBITDA), com tratamento de Passivo a Descoberto.</li>
+        <li><strong>Modelagem Econométrica no Jamovi & Python (Caso Banco Horizonte – UFJF):</strong> Regressão Linear Múltipla ($n = 180$, $R^2 = 78,90\%$, $p < 0,001$) para estimar determinantes do volume investido por clientes bancários, incluindo tratamento de multicolinearidade via VIF e criação de módulo próprio para o Jamovi.</li>
+        <li><strong>Mapeamento de Processos (BPMN / SIPOC) e Controle Estatístico de Processos (CEP):</strong> Modelagem de processos de estoque e produção (casos <em>Govalpan</em> e <em>Papirus</em>) aplicando Diagrama de Ishikawa, Gráfico de Pareto, Histograma e Cartas de Controle (CEP).</li>
+        <li><strong>Valuation, WACC, EVA e Estrutura de Capital (Raízen S.A. – RAIZ4 e Alupar – ALUP11):</strong> Análise do Prospecto de IPO, ITRs 2024–2025, emissões de <em>Green Notes</em>, Custo Médio Ponderado de Capital (WACC), ROIC, EVA e Alavancagem Operacional/Financeira.</li>
+      </ul>
+    </section>
+
+    <!-- CURSOS E CERTIFICAÇÕES COMPLEMENTARES -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Cursos e Certificações Complementares (+3.000 Horas)</h2>
+      <ul class="cv-list">
+        <li><strong>Business Intelligence com Power BI</strong> – SENAC Minas – <strong>40 horas</strong> (07/2024 – 08/2024 | Reg. 13-1080/2024).</li>
+        <li class="new-from-drive"><strong>Excel: do Básico ao Avançado (PROCV, Tabelas Dinâmicas, Macros e Introdução ao VBA)</strong> – IFMG (Instituto Federal de Minas Gerais) – <strong>40 horas</strong> (04/2022 – 06/2022). <span class="badge-new-screen">Adicionado do Drive</span></li>
+        <li><strong>Formação em Projetos e Liderança – Pulsar Jovem</strong> – Fundação Renova / FGPA – <strong>300 horas</strong> (03/2024 – 07/2025).</li>
+        <li class="new-from-drive"><strong>Trilha de Investimentos e Fundos Imobiliários (XP 20 Anos – 3 Certificados)</strong> – Xpeed School (XP Inc.) – <strong>9,5 horas</strong> (06/2021). <span class="badge-new-screen">Adicionado do Drive</span></li>
+        <li><strong>Programa de Aprendizagem Comercial</strong> – SENAC Minas – <strong>1.000 horas</strong> (10/2019 – 05/2021).</li>
+        <li><strong>Escola de Negócios (Gestão e Empreendedorismo)</strong> – Nova Educacional – <strong>84 horas</strong> (09/2019 – 05/2020).</li>
+        <li><strong>Aprendizagem Industrial em Processos Administrativos</strong> – SENAI MG – <strong>714 horas</strong> (07/2018 – 06/2019).</li>
+        <li class="new-from-drive"><strong>Informática Profissional Completa</strong> – Logos Escola de Informática – <strong>115 horas</strong> (2015 – 2016) | <strong>Formação em Inglês</strong> – Fernando Idiomas (2022). <span class="badge-new-screen">Adicionado do Drive</span></li>
+      </ul>
+    </section>
+
+    <!-- HABILIDADES TÉCNICAS -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Habilidades Técnicas e Ferramentas</h2>
+      <div class="skills-compact-grid">
+        <div>
+          <ul class="cv-list">
+            <li><strong>Análise de Dados e BI:</strong> Power BI (ETL Power Query, Modelagem e DAX), Excel Avançado (PROCV, ÍNDICE/CORRESP, Tabelas Dinâmicas, Macros/VBA), Python (Pandas, Statsmodels) e Jamovi (Regressão e Estatística).</li>
+            <li><strong>Automação e Inteligência Artificial:</strong> n8n (Workflows), Agentes de IA Generativa, Integrações via API REST, Webhooks, Python (pyfpdf, Playwright, Telethon), ZapSign API e DeskcommCRM.</li>
+          </ul>
+        </div>
+        <div>
+          <ul class="cv-list">
+            <li><strong>Finanças, ERP e Processos:</strong> TOTVS ERP (Departamento Pessoal), ERP Desbravador, PMS FastHotel, Análise de Balanços (BP/DRE), Indicadores (EBITDA, ROE, ROA, WACC, EVA, VPL, TIR), BPMN, SIPOC e Controle Estatístico (CEP).</li>
+            <li><strong>Marketing de Performance e Web:</strong> Meta Ads (Gestão de Tráfego e Marketing API), Google Meu Negócio (SEO Local), HTML5/CSS3/JS e Netlify.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREMIAÇÕES, LIDERANÇA E TRABALHO VOLUNTÁRIO -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Premiações, Liderança Universitária e Voluntariado</h2>
+      <ul class="cv-list">
+        <li class="new-from-drive"><strong>Medalha de Honra ao Mérito / Bronze – V Olimpíada Nacional de Ciências (ONC / MCTI)</strong> – Reconhecimento científico nacional (Código de validação: <code>I4KNABFY</code>). <span class="badge-new-screen">Adicionado do Drive</span></li>
+        <li class="new-from-drive"><strong>Diretoria Acadêmica e Extensão UFJF-GV (2024):</strong> Membro da Diretoria da Associação Atlética Acadêmica Gerenciais UFJF-GV (15h) e Membro da Comissão Organizadora do Projeto de Extensão <em>“Que tal doar?”</em> (UFJF-GV, 16h, Reg. <code>GV035446</code>). <span class="badge-new-screen">Adicionado do Drive</span></li>
+        <li><strong>Diploma Categoria Azul – Fundação Hemominas (11/2025):</strong> Doador regular de sangue homenageado oficialmente por <strong>13 doações voluntárias</strong> realizadas em prol da comunidade.</li>
+        <li><strong>Voluntariado Social e Editorial:</strong> Revisor textual na Revista de Jovens <em>“Cruz de Malta 2024.1 – DiversIDADES”</em> e voluntário na <strong>Missão Vida</strong> (apoio a pessoas em situação de vulnerabilidade social).</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <script>
+    const FOCUS_PROFILES = {
+      geral: {
+        objective: "OBJETIVO: Analista de Dados | Business Intelligence | Finanças Corporativas | Automação de Processos e IA",
+        summary: "Profissional em fase final de conclusão do <strong>Bacharelado em Administração pela UFJF</strong> (grade curricular e defesa de TCC concluídas em novembro/2026, com <strong>disponibilidade imediata para horário integral</strong>) e <strong>Técnico em Finanças pelo SENAC (800h)</strong>. Possui mais de 6 anos de trajetória prática integrando rotinas administrativas, financeiras, Departamento Pessoal (<strong>TOTVS ERP</strong>), atendimento de alta demanda (<strong>UAI</strong>), análise quantitativa de dados (<strong>Power BI, Excel Avançado, Python e Jamovi</strong>) e desenvolvimento de automações e Agentes de IA (<strong>n8n, APIs REST, Webhooks e CRM</strong>). Perfil analítico e orientado a resultados, com histórico comprovado em auditoria de funis comerciais, modelagem econômico-financeira, mapeamento de processos (BPMN/CEP) e redução de retrabalho operacional."
+      },
+      dados: {
+        objective: "OBJETIVO: Analista de Dados & Business Intelligence (BI) | Analista Financeiro / Controladoria & Planejamento (FP&A)",
+        summary: "Administrador concludente pela <strong>UFJF</strong> (grade e TCC concluídos em nov/2026 — <strong>disponibilidade imediata em horário integral</strong>) e <strong>Técnico em Finanças pelo SENAC (800h)</strong>, especializado em <strong>Análise de Dados, Business Intelligence (Power BI e Excel Avançado – IFMG)</strong>, modelagem estatística/econométrica (<strong>Python e Jamovi</strong>) e <strong>Finanças Corporativas</strong> (Análise de DRE/BP, Liquidez, EBITDA, WACC, EVA, VPL e TIR). Experiência prática em auditoria de bases comerciais (+R$ 1,55M diagnosticados), controle de indicadores em ERPs (TOTVS / Desbravador) e automação de relatórios executivos."
+      },
+      automacao: {
+        objective: "OBJETIVO: Especialista em Automação de Processos (RPA / n8n / Python) | Agentes de IA | Revenue Operations & CRM",
+        summary: "Especialista em <strong>Automação de Processos, Integração de Sistemas e Agentes de IA Generativa</strong>, com formação em <strong>Administração pela UFJF</strong> (concludente em nov/2026 — <strong>disponibilidade integral imediata</strong>) e base sólida em Finanças e Processos (BPMN). Experiência comprovada no desenvolvimento de workflows em <strong>n8n</strong>, scripts em <strong>Python (APIs REST, Webhooks, Playwright, ZapSign API, Meta Ads API)</strong>, implantação de CRM (DeskcommCRM) e auditoria de funis de atendimento automatizado (AskSuite / WhatsApp API), unindo visão de negócios à execução técnica."
+      },
+      adm: {
+        objective: "OBJETIVO: Analista Administrativo / Financeiro | Gestão de Processos e Qualidade | Departamento Pessoal (TOTVS ERP)",
+        summary: "Administrador concludente pela <strong>Universidade Federal de Juiz de Fora (UFJF)</strong> (grade curricular e TCC concluídos em nov/2026 — <strong>disponibilidade imediata para período integral</strong>) e <strong>Técnico em Finanças pelo SENAC (800h)</strong>. Mais de 6 anos de experiência prática em rotinas administrativas, financeiras, faturamento, atendimento de alto volume (UAI) e <strong>Departamento Pessoal com domínio do sistema TOTVS ERP</strong> (BigMais Supermercados). Domínio avançado de Excel, Power BI, mapeamento de processos (BPMN / SIPOC / Qualidade) e ferramentas de automação para ganho de produtividade administrativa."
+      }
+    };
+
+    function setFocus(key, btnEl) {
+      const profile = FOCUS_PROFILES[key];
+      if (!profile) return;
+      document.getElementById("cvObjective").innerHTML = profile.objective;
+      document.getElementById("cvSummaryText").innerHTML = profile.summary;
+      document.querySelectorAll(".toolbar-left .toolbar-btn").forEach((b) => b.classList.remove("active"));
+      if (btnEl) btnEl.classList.add("active");
+    }
+
+    function toggleHighlightNew() {
+      document.body.classList.toggle("highlight-new");
+      const btn = document.getElementById("toggleNewBtn");
+      const isOn = document.body.classList.contains("highlight-new");
+      btn.textContent = isOn ? "✨ Destacar Novos Itens do Drive (Ativo)" : "✨ Destacar Novos Itens do Drive (Oculto)";
+      btn.classList.toggle("active", isOn);
+    }
+
+    function toggleEditable() {
+      const sheet = document.getElementById("cvSheet");
+      const btn = document.getElementById("toggleEditBtn");
+      const isEditable = sheet.getAttribute("contenteditable") === "true";
+      if (isEditable) {
+        sheet.setAttribute("contenteditable", "false");
+        btn.textContent = "✏️ Editar Texto na Tela";
+        btn.classList.remove("active");
+      } else {
+        sheet.setAttribute("contenteditable", "true");
+        btn.textContent = "✅ Modo Edição Ativo (Clique em qualquer texto)";
+        btn.classList.add("active");
+        sheet.focus();
+      }
+    }
+  </script>
+</body>
+</html>
