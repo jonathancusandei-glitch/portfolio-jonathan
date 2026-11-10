@@ -109,9 +109,9 @@ const CASE_STUDIES = {
 
   "econometria-banco-horizonte": {
     badge: "Econometria, Estatística & Python/Jamovi",
-    date: "2026 • UFJF (CAD026)",
+    date: "2026 • UFJF",
     title: "Modelagem Econométrica (Regressão Linear Múltipla) & Diagnóstico de Multicolinearidade — Caso Banco Horizonte",
-    client: "Disciplina Métodos Quantitativos Aplicados à Administração (CAD026 — UFJF)",
+    client: "Métodos Quantitativos Aplicados à Administração — UFJF",
     problem: "Identificar estatisticamente quais variáveis socioeconômicas e comportamentais determinam o volume total investido por clientes do Banco Horizonte (n = 180) para orientar políticas de segmentação, assessoria financeira e alocação de marketing.",
     solution: [
       "Estimação por Mínimos Quadrados Ordinários (MQO): Modelagem de Regressão Linear Múltipla no software Jamovi e validação cruzada em Python (statsmodels).",
@@ -146,9 +146,9 @@ const CASE_STUDIES = {
 
   "qualidade-bpmn-cep": {
     badge: "Gestão da Qualidade, BPMN & Controle Estatístico",
-    date: "2026 • UFJF (CAD056)",
+    date: "2026 • UFJF",
     title: "Mapeamento de Processos (BPMN / SIPOC) e Controle Estatístico de Processos (CEP) — Govalpan & Papirus",
-    client: "Estudos Práticos em Gestão da Qualidade (CAD056 — UFJF)",
+    client: "Estudos Práticos em Gestão da Qualidade — UFJF",
     problem: "Divergências recorrentes entre estoque físico e contábil, perdas por avarias/vencimento e variabilidade operacional nos processos de recepção, armazenagem e expedição.",
     solution: [
       "Modelagem de Processos de Negócio: Mapeamento completo AS-IS / TO-BE utilizando notação BPMN (Camunda/Bizagi) e matriz SIPOC (Suppliers, Inputs, Process, Outputs, Customers).",
@@ -164,9 +164,9 @@ const CASE_STUDIES = {
 
   "valuation-raizen-b3": {
     badge: "Valuation, WACC, EVA & Estrutura de Capital",
-    date: "2026 • UFJF (FIN008)",
+    date: "2026 • UFJF",
     title: "Análise de Estrutura de Capital, WACC, EVA e Alavancagem — Raízen (RAIZ4), Alupar (ALUP11) e Varejo",
-    client: "Administração Financeira e Orçamentária II (FIN008 — UFJF)",
+    client: "Administração Financeira e Orçamentária II — UFJF",
     problem: "Analisar como decisões de financiamento (emissão de ações em IPO vs. emissão de dívida internacional / Notes de longo prazo), custo de capital e alavancagem impactam a geração ou destruição de valor econômico aos acionistas.",
     solution: [
       "Estudo de Caso Raízen S.A. (RAIZ4): Análise documental do Prospecto Definitivo de IPO (2021), Demonstrações Financeiras (ITRs 2024/2025) e emissões de Green Notes (2034/2037/2054) para alongamento do prazo médio da dívida.",

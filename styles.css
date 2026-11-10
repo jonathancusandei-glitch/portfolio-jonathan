@@ -1040,8 +1040,8 @@ a {
    CENTRAL DE LINKS (HUB LINKTREE INTEGRADO)
    ========================================================================== */
 .exec-avatar-img {
-  width: 76px;
-  height: 76px;
+  width: 86px;
+  height: 86px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--accent-primary);
