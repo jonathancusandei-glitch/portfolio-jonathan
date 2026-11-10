@@ -1103,3 +1103,32 @@ a {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
+
+
+/* Fix Navbar Alignment & Prevent Line Wrapping */
+.nav-inner {
+  gap: 24px;
+}
+.brand {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.nav-links {
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+.nav-links li {
+  white-space: nowrap;
+}
+.nav-links a {
+  white-space: nowrap;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.nav-links a:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+.nav-actions {
+  flex-shrink: 0;
+  white-space: nowrap;
+}

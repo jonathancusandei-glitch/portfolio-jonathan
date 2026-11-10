@@ -1115,6 +1115,35 @@ a {
   color: var(--text-muted);
 }
 
+
+/* Fix Navbar Alignment & Prevent Line Wrapping */
+.nav-inner {
+  gap: 24px;
+}
+.brand {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.nav-links {
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+.nav-links li {
+  white-space: nowrap;
+}
+.nav-links a {
+  white-space: nowrap;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.nav-links a:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+.nav-actions {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
   </style>
 </head>
 <body>
@@ -1126,17 +1155,17 @@ a {
         <div class="brand-monogram">JC</div>
         <div class="brand-text">
           Jonathan Cusandei
-          <span>Adm. UFJF • Dados, BI, Finanças & IA</span>
+          <span>Administração UFJF • Dados, BI & IA</span>
         </div>
       </a>
 
       <ul class="nav-links">
-        <li><a href="#sobre">Links & Resumo</a></li>
+        <li><a href="#sobre">Início</a></li>
         <li><a href="#competencias">Competências</a></li>
-        <li><a href="#projetos">Portfólio (10 Cases)</a></li>
+        <li><a href="#projetos">Projetos</a></li>
         <li><a href="#trajetoria">Trajetória</a></li>
-        <li><a href="#certificados">Formação & Certificados</a></li>
-        <li><a href="curriculo.html" style="color: var(--accent-emerald); font-weight: 700;">📄 Ver Currículo</a></li>
+        <li><a href="#certificados">Formação</a></li>
+        <li><a href="curriculo.html" style="color: var(--accent-emerald); font-weight: 700;">📄 Currículo</a></li>
       </ul>
 
       <div class="nav-actions">
