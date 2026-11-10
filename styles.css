@@ -1132,3 +1132,56 @@ a {
   flex-shrink: 0;
   white-space: nowrap;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 14px;
+  }
+  .navbar {
+    height: 64px;
+  }
+  .nav-inner {
+    gap: 8px;
+  }
+  .brand {
+    gap: 8px;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+  .brand-monogram {
+    width: 34px;
+    height: 34px;
+    font-size: 0.82rem;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .brand-text {
+    font-size: 0.9rem;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .brand-text span {
+    font-size: 0.66rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .nav-actions {
+    gap: 6px;
+  }
+  .theme-toggle {
+    width: 34px;
+    height: 34px;
+    font-size: 0.95rem;
+  }
+  .nav-actions .btn-sm {
+    padding: 7px 10px;
+    font-size: 0.76rem;
+  }
+  .hide-on-mobile {
+    display: none;
+  }
+  .hero {
+    padding: 92px 0 48px;
+  }
+}
